@@ -172,7 +172,6 @@ VTK
 
 rasterization
 
-
 = Support Lecture
 
 == Images
@@ -249,3 +248,4 @@ To shift something towards / from the origin (x,y) use Translation matrix
 $ mat(1, 0, -x; 0,1,-y;0,0,1) $
 Rotation matrix
 $ mat(cos(theta), -sin(theta), 0; sin(theta), cos(theta), 0; 0,0,1) $
+
