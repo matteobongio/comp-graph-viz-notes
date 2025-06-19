@@ -23,7 +23,7 @@
 
 == Points and Verticies
 
-#bluebox("Objects", [
+#Definitionbox("Objects", [
    All displayable _shapes_ in a scene
 
    They can be represented as:
@@ -100,6 +100,59 @@ A geometry is a collection of vertices and edges
    $
 ])
 
+
+== Polylines and Polygons
+
+#Definitionbox("Polyline", [
+   A continuous line made of connected straight line segments
+
+   Open/closed: if the start and end points are the same.
+])
+
+#Definitionbox("Polygon", [
+   A polygon has a coherent winding: internal boundaries have the opposite winding of
+   external boundaries.
+   - Area:
+      Calculate polygon area seperately for each boundary
+
+      (formula is BS)
+
+   *Simple Polygon*: no self-intersections or holes.
+      - Area: $A = 1/2 * (x_1 * y_2 - x_2 * y_1 + x_2 * y_3 - x_3 * y_2 + 
+         ... + x_n * y_1 - x_1 * y_n)$
+
+   closed polylines are simple polygons
+
+   - convexity: there does not exist a line between the vertices that crosses or is outside
+      the boundry of the polygon
+   - Inside/outside test:
+      + Ray-casting: quick, but numerically unstable, shot ray from left-frame, count the number
+         of times it crosses the polygon before arrving at the point, if it s an odd number,
+         it's inside.
+      + Winding number: slow, but stable, draw some trianlges, do some math, if the winding sum
+         $!= 0$, the point is inside the polygon.
+])
+
+
+== Surface Meshes
+
+We need meshes for non-simple polygons. Holes and self-intersections are difficult, so
+we use something simpler than polygons: triangles.
+
+We define mesh geometry as geometry (vertices and edges) and the set of triangles they span.
+
+All edges with 2 adjacent triangles: interior edges
+All edges with 1 adjacent triangle: boundary edges
+
+#pinkbox("How to obtain triangular meshes", [
+   ear clipping
+])
+
+inside/outside test: use interpolation via barycentric coordinates
+
+== Images
+
+TODO
 
 = Revision
 

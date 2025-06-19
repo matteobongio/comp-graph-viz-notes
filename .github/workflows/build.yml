@@ -18,7 +18,7 @@ jobs:
       # go to settings, action, set to read/write
       - uses: svenstaro/upload-release-action@v2
         with:
-          release_name: "Languages and Machines - Matteo Notes"
+          release_name: "Intro to Computer Graphics and Visualization - Matteo Notes"
           file: main.pdf
           overwrite: true
     
