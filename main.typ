@@ -171,3 +171,5 @@ opengl compatability profile features on all platforms
 VTK
 
 rasterization
+
+projections
