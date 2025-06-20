@@ -162,6 +162,17 @@ TODO
 
 == rotations on a plane
 
+== Rotation matrix
+
+$
+   R_x (theta) = mat(1, 0, 1; 0, cos theta, -sin theta; 0, sin theta, cos theta) \ 
+   R_y (theta) = mat(cos theta, 0, sin theta; 0, 1, 0; - sin theta, 0, cos theta) \ 
+   R_z (theta) = mat(cos theta, - sin theta, 0; sin theta, cos theta, 0; 0, 0, 1) \ 
+$
+
+https://en.wikipedia.org/wiki/Rotation_matrix?useskin=vector
+
+
 == All types of color maps
 
 wtf is colom major order? (the way to order matricies in 1D)
