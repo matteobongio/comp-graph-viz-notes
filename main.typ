@@ -152,9 +152,135 @@ inside/outside test: use interpolation via barycentric coordinates
 
 == Images
 $
-   "Image" I &= I(V) \
-   
+   "Image" I = I(V) \
+   v in Z^N, n = 2, forall v in V \
+   F( I(v = (x, y))) forall v in V \
+   = I(x, y) ("attribute of the image") \
+   f = mat(
+      f(0, 0), f(0, 1), ..., f(0, N - 1);
+      f(1, 0), f(1, 1), ..., f(1, N - 1);
+      dots.v, dots.v, dots.v;
+      f(M - 1, 0), f(M - 1, 1), ..., f(M - 1, N - 1);
+   ) \
+   I(x, y) in R^1 ("monochromatic") \
+   I(x, y) in R^3 ("trichromatic") 
 $
+
+=== Interpolation
+
+Images are only defined for discrete intervals. Interpolation is used for non-integer coordinates.
+
+- Nearest Neighbour, choose the color of the closest discrete coordinates
+- (weighted) Bilinear:
+   take the four closest points, calculate a weighted average.
+$
+   "let" x &= 0.5, &&y = 1 \
+   x_0 &= int(x), &&y_0 = int(y) \
+   x_1 &= x_0 + 1, &&y_1 = y_0 + 1 \
+   alpha &= x - x_0, &&beta = y - y_0 \
+$
+$
+   w = mat(
+      (1 - alpha)(1 - beta), (1 - alpha)beta;
+      alpha(1-beta), alpha beta
+   ) \
+   I(x, y) = I(x_0, y_0) w_11 + I(x_0, y_1) w_12 + I(x_1, y_0) w_21 + I(x_1, y_1) w_22
+$
+- bicubic
+
+== Grids
+
+Images are a specialized form of grids
+
++ Regular: constant cell size
++ Rectilinear: variable vell size
++ curvilinear: non-orthogonal (you can make a circle into a grid)
+
+structured grids:
+- easy interpolation and containment checks
+- often composed of trapezoidal base shapes (hexahedra in 3D)
+
+Other grid-like structures: Cell elements
+- Cell types - 0D: points
+- Cell types - 1D: polylines #text(lime)[linear]
+- Cell types - 2D:
+   - triangle
+   - quads
+   - rectangle #text(green)[structured]
+   - polygons
+- Cell Types - 3D:
+   - tetrahedra
+   - cubes/ octahedra  #text(green)[structured]
+   - prisms
+
+
+== Properties of Grids and Meshes
+
+Base primitives: polygons, polytopes (#text(red)[???]) and their extrusions (#text(red)[???])
+
+Impacts complexity of:
+- neighbourhood search
+- interpolation
+- point-in-primitive checks
+- intersection tests
+- mesh and grid element count
+
+#block(breakable: false)[ #columns(2, [
+   #pinkbox("Regularity", [
+      For all cell primitives:
+      - equiangilar: all (internal) angles are equal
+      - equilateral: all bounding edges are of equal length
+      - all cell primitives are of equal type
+   ])
+
+   #colbreak()
+
+   #pinkbox("Linearity", [
+      - the vertex sampling function of the grid or mesh is linear
+
+      There is a linear relationship (sampling function) between the vertex
+      coordinates and the shape function of the grid or mesh.
+   ])
+
+   #pinkbox("Isotropy", [
+      For each cell primitive:
+      - all its adjacent haave a uniform scaling to its own size and shape
+      - shape preserving saling
+   ])
+
+])]
+
+== Compound Objects
+
+Combining _sets_ of homogeneous representation classes to represent
+complex shapes beyond of what the base representation supports.
+
+*Benefits*
+- represent shapes of higher dimensions
+- conforming to semantic boundaries
+- manage memory footprints
+- allow for simpler shape-to-shape morph
+
+=== Mesh-based
+
+*piecewise linear complexes*
+
+*polygon soups*
+- collection of polygons
+
+#image("images/compound_meshbased.png")
+
+=== Shape-based
+
+Solid object defined by 3D base primitives.
+
+== Algebraic geometry
+
+Every linear, bound shape can be described by a linear function in its geometric space
+
+*innside/outside*: instead of being either inside or outside, we can also compute the distance to 
+the boundary, the whole geometry can be described be $f(x, z) = 0$
+
 = Revision
 
 == Matrix multiplication
@@ -189,7 +315,6 @@ rasterization
 == Images
 === 2D Weighted Bilineaer Interpolation
 Know the formula
-#let int(x) = $floor.l #x floor.r$
 
 $ 
    x_0 = int(x) = 3, x_1 = 1 + x_0 = 4, y_0 = int(y) = 4\

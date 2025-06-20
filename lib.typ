@@ -1,5 +1,8 @@
 #import "@preview/showybox:2.0.3": showybox
 
+#let int(x) = $floor.l #x floor.r$
+
+
 #let generalbox(color, title, text, ..opts) = {
   showybox(
     title-style: (
