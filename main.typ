@@ -375,6 +375,106 @@ the boundary, the whole geometry can be described be $f(x, z) = 0$
 - $< 8 "bit", 8 "bit", 16 "bit", 32 "bit"$
 
 
+= The virtual Camaera
+
+conditions:
+- centered view at $(x,y)_"proj" = (0,0)$
+- fixed aspect ratio
+
+Projection matrix is used to transform objects to the eye-view of the 
+camera.
+
+= transforming Scene Objects
+
+move it to the $(0, 0)$, then do what you need, then move it back.
+
+= Color from Illumination
+#table(
+   columns: (50%, 50%),
+   table.header([*Light as a Particle*], [*Light as a Wave*]),
+   [ *Emission* ], [ *Scattering* ],
+
+   [ *Reflection*: objects reflect photons opposite to the angle, for a 
+   certain spectra of the wavelength. ],
+   [ *interference* ],
+
+   [ *Refraction*: translucent objects reflect photons internally, bending
+   them on an angle. ], 
+   [ *Diffuse reflection* ],
+
+   [ *Total internal reflection* ], [ *Absorption* ],
+
+   [*Shadowing*], [ *Attenuation* ],
+)
+
+
+
+simplifications:
+we only care about _local_ illumination, specifically diffuse reflection
+
+
+*Lambertian (diffuse) surface reflection*:
+- idealized matte surface
+- independent of view direction
+
+$
+   I_D = cos theta = N L
+$
+
+
+Sometimes diffuse reflection is not enough, and we need _ambient reflection_
+
+We can considure it as just a constant
+
+$
+   I = I_A + I_D
+$
+
+= Renduring Pipeline and Image Generation
+
+#columns(4, [
+#pinkbox("Application", [
+   - Object definition / creation
+   - world layout
+   - AI & world logic (physics fluid + collisions)
+   - user interaction
+])
+
+#colbreak()
+
+#pinkbox("Geometry/Scene composition", [
+   - object and camera transformation
+   - vertex processing
+   - projection
+   - perspective division
+   - clipping
+   - window / viewport / screen mapping
+])
+
+(
+Polygon tessellation, triangle tessellation,
+geometry processing
+)
+
+#colbreak()
+
+#pinkbox("Image Generation", [
+   - rasterizer or raycaster
+   
+   #line()
+
+   (volume) ray casting vs ray tracing:
+   - ray casting doesn t reflect, it just checks which objects can
+      be seen
+])
+
+#colbreak()
+
+#pinkbox("Display", [
+   - output to screen
+])
+
+])
 
 
 
