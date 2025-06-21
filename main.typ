@@ -549,6 +549,93 @@ datasets intended to help people carry out tasks more effectively."
 - design for cisual deficiencies
 - qualifying evaluation
 
+= OpenGL
+
+- state machine
+- cross platform
+- rendering pipeline abstraction
+- shader language and flexibility
+- integration
+
+== Setup
+
+- needs a render target (screen, window, canvas, memory buffer)
+- OpenGL draws a framebuffer, platforms implement transforming it
+   to their render target
+
++ create OpenGL context with target (connect to GPU, set the bit depth, etc.)
++ call `init()`
+   define background color, enable depth buffer, etc.
++ enter rendering loop
+
+== State Machine
+
+advantages:
+- every state has a default, every behavior is defined
+- only change the states you need to
+
+disadvantages:
+- lots of target switching
+- easy to lost overview
+- some simple functionalities require a lot of code
+- a lot of similarly named functions
+
+== Precessing Modes
+
+#pinkbox("Immediate mode", [
+   'novice mode', send data piece by piece.
+   - `glBegin() ... glEnd()`
+   - geometry is sent _immediately_ to the gpu
+   - geometry is rendered _roughly_ in order sent
+
+   advantage: you can _control_ the render order
+
+   disadvantages:
+   - forces GPU to tun _in sync_ with the host code (slow)
+   - need to transmit entire geometry vie PCIe to GPU _every frame_ (very slow)
+   - prevents efficient parallel scheduling of GPU (slow)
+
+   *old mode, requires compatability mode to use*
+])
+
+=== OpenGL *$2.0^+$*
+
+- Programmable pipeline, shaders & buffer objects.
+- graphics controllder by the device
+- send geometry once
+
+== Defining simple verteces and attributes
+
+#image("images/opengl.png")
+
+== Transformations and targets
+
+*Pipeline*
+
+- you define transformation vectors and matricies directly
+- transformations are done on GPU _in shaders_, _uniform variables_
+
+*Fixed-Functionality*
+
+- transformations are done on _host_, using OpenGL functions
+
+
+== From Immediate-mode to shaders
+
+#purplebox("Shaders", [
+   - small c-like programs executed on the GPU for every _vertex_ or _pixel_
+   - operate under a _shared memory principle_
+   - processing of a single vertex/pixel is done _independently_
+
+   *Types of shaders*:
+   - *vertex shader*
+   - tessellation shader
+   - geometry shader
+   - *fragment shader*
+   - compute shader
+])
+
+
 
 = Revision
 
