@@ -476,6 +476,78 @@ geometry processing
 
 ])
 
+= Visualization
+
+"Computer-based visualization systems provide visual representations of
+datasets intended to help people carry out tasks more effectively."
+
+#block(breakable: false)[ #columns(2, [
+
+#Definitionbox("Marks", [
+   geometric elements used to identify items of a dataset.
+
+   e.g. points, lines, areas, volumes
+])
+
+#Definitionbox("Mapping function", [
+   transform data into marks and channels.
+   - 2D: color maps
+   - 3D: transfer functions
+   map _attributes_ to a scale of the _channel_
+])
+
+#colbreak()
+
+#Definitionbox("Channels", [
+   encode values of the data associated with items in the dataset.
+
+   e.g. position on an axis, length, width, angle, color, brightness,
+   saturation
+
+   not all methods are equally good in all contextes.
+
+   e.g. numeric, ordinal, categorical.
+
+   Also keep in mind perspective limitiations, like color blindness
+])
+
+]) ]
+
+== The Visualization Pipeline
+
++ acquisition
+   - obtain data from data source
+   - highly domain specific
+   - measurements: noisy, unstructured
+   - simulation: data intense
++ Data $D$
++ Filtering
+   - data transformation for mapping
+   - pre-processing: cleaning
+   - dynamic processing: organize, smoothing, interpolation
++ Transformed data $D'$
++ Mapping
+   - set up coordinate system
+   - layout
+   - geometry transform
+   - color and transparency mapping
+   - borders
++ Representation $R$
++ Renduring
+   - *computer graphics*
+      - rasterization, ray tracing, scatterplots
+   - address:
+      - clipping and occlusion
+      - illumination
++ Visual $V$
+
+== Challenges and Best Practices
+
+- clutter
+- context: show focus while preserving context
+- encoding adequacy
+- design for cisual deficiencies
+- qualifying evaluation
 
 
 = Revision
