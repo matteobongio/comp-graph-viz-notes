@@ -281,6 +281,103 @@ Every linear, bound shape can be described by a linear function in its geometric
 *innside/outside*: instead of being either inside or outside, we can also compute the distance to 
 the boundary, the whole geometry can be described be $f(x, z) = 0$
 
+
+= Transformations
+
+== Transformations in 2D
+
+- Move
+- deform
+- switch between coordinate systems:
+   - global
+   - camera
+   - image
+   - light source
+
+#columns(2, [
+#purplebox("Scaling", [
+   - scaling factors $s_x, s_y$
+   - condition: $s_x != 0, s_y != 0$
+   - $p' = (s_x p_x, s_y p_y)^T$
+])
+
+#purplebox("Mirror", [
+   mirror on a Principal axis: negate scale _of the other axis_
+])
+
+#purplebox("Shearing", [
+   $
+      S h_"hor" = S H_x = mat(1, s h_x; 0, 1) \
+      S h_"vert" = S H_y = mat(1, 0; s h_y, 1)
+   $
+])
+
+#colbreak()
+
+#purplebox("Counter-clockwaise Rotation", [
+   $
+      p &= vec(p_x, p_y) = vec(r cos alpha, r sin alpha)\
+      bold(R) &= mat(cos theta, - sin theta; sin theta, cos theta) \
+      p' = bold(R) p &= vec(r cos(alpha + theta), r sin(alpha + theta))
+   $
+])
+
+#purplebox("Translation", [
+   $
+      p' = p + t
+   $
+])
+])
+
+== Transformations in 3D
+
+*scaling, reflection, and Translation* still work the same.
+
+#purplebox("Rotation", [
+   $
+      R_x (theta) = mat(1, 0, 1; 0, cos theta, -sin theta; 0, sin theta, cos theta) \ 
+      R_y (theta) = mat(cos theta, 0, sin theta; 0, 1, 0; - sin theta, 0, cos theta) \ 
+      R_z (theta) = mat(cos theta, - sin theta, 0; sin theta, cos theta, 0; 0, 0, 1) \ 
+   $
+])
+
+#purplebox("Shearing", [
+   $
+      S h_x = mat(1, 0, 0; s h_y, 1, 0; s h_z, 0, 1) \ 
+      S h_y = mat(1, s h_x, 0; 0, 1, 0; 0, s h_z, 1) \ 
+      S h_z = mat(1, 0, s h_x; 0, 1, s h_y; 0, 0, 1) \ 
+   $
+])
+
+
+#purplebox("Projection", [
+   project a 3D scene onto a 2D screen
+
+   - Orthographic projection: make $z = 0$ for everything in the scene
+      
+      A form of parallel projection where all projection lines 
+      are orthogonal to the projection plane.
+
+   - Perspective projection
+      
+])
+
+
+= Color and Intensity representations
+
+*Achromatic / Monochromatic and Trichromatic*
+
+- RGB: additive
+- CMYK: subtractive (print and paint)
+
+*Quantization and Memory*
+
+- $< 8 "bit", 8 "bit", 16 "bit", 32 "bit"$
+
+
+
+
+
 = Revision
 
 == Matrix multiplication
