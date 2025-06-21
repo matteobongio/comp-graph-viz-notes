@@ -635,6 +635,45 @@ disadvantages:
    - compute shader
 ])
 
+= VTK
+
+#image("images/visualization.png")
+
+
+== Core Concepts
+
+*pipeline*: Reader|Source → Filter(s) → Mapper → Actor (→ Interactor) → Renderer → RenderWindow
+
+*Dataset*:
+- point
+- line/polyline
+- polygon
+- polytopes
+- grids
+- ImageData
+
+*Filter*:
+- sampling/glyphing
+- geometric reconstruction
+- attribute derivation
+- spactial embedding
+
+*Mapper*:
+- performs _visual mapping_: colormaps, channel modulation, scaling, glyphs
+
+*Actor*:
+- visual representation in scene
+- interactable item
+- contains mappers, volumes, etc.
+
+*Renderer*:
+- contains viewport, camera, etc.
+- executes the render pipeline
+
+A Renderer can have many actors, a RenderWindow can have many Renderers
+
+
+
 
 
 = Revision
