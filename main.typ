@@ -40,7 +40,7 @@ Every _bounded_ shape has:
 - an exterior
 
 #pinkbox("Orientation and Winding",[
-   Left hand: clockwise winding order
+Left hand: clockwise winding order
 
    Right hand: counter clockwise winding order
 ])
@@ -678,9 +678,191 @@ A Renderer can have many actors, a RenderWindow can have many Renderers
 
 = Revision
 
+== Tutorials
+
+=== Tutorial 1
+
+*Linear Algebra*
+
+#pinkbox("vector negation and vector inversion", [
+   - negating a vector is the same as flipping it the opposite direction
+   - vector inversion is the negative of the transpose
+])
+
+#pinkbox("wedge product", [
+   - in 2D, $u and u = u_1 v_2 - u_2 v_1$
+])
+
+#pinkbox("axis reflection", [
+   #let v = $bold(v)$
+   #let n = $bold(n)$
+   #let r = $bold(r)$
+   To reflect vector #v on the axis of the _normalized_ vector #n:
+   $
+   #r = #v - 2 (#v dot #n) #n
+   $
+])
+
+#bluebox("Matrix", [
+   $ 
+      4 times 2 "matrix" \
+      a = mat(
+         a_11, a_12;
+         a_21, a_22;
+         a_31, a_32;
+         a_41, a_32;
+      )
+   $
+])
+
+#pinkbox("vector matrix dot product", [
+   *Row vector*
+
+   $1 times n "vector", n times m "matrix" => 1 times m "vector"$
+
+   $
+      A = mat(1, 2; 3, 4), v = mat(5, 6) \
+      v A = mat(5, 6) mat(1, 2; 3, 4) = mat(5 dot 1 + 6 dot 3, 5 dot 2 + 6 dot 4) = mat(23, 34)
+   $
+])
+
+#pinkbox("matrix vector dot product", [
+   *Column vector*
+   
+   $m times n "matrix", n times 1 "vector" => m times 1 "vector"$
+
+   $
+      A = mat(1, 2; 3, 4), v = vec(5, 6) \
+      A v = vec(1 dot 5 + 2 dot 6, 3 dot 5 + 4 dot 6) = vec(17, 39)
+   $
+])
+
+- matrix matrix dot product
+
+#pinkbox("matrix inversion", [
+   - square matrix
+   - the vectors are linearly independent
+   - nonzero determinant
+])
+
+#pinkbox("sampling lines in descrete space (bresenhams) + implicit line equations", [
+   A line going through points $A "and" B$ in the form $A x + B y + C = 0$
+   $
+      "direction vector": u = B - A \
+      "normal vector": n = (- u_y, u_x) \
+      n dot u = 0 \
+      n_x x + n_y y + C = 0 \
+      "since we know" A "is on the line": \
+      n_x A_x + b_y A_y + C = 0 \
+      "solve for" C "then simplify"
+   $
+
+   *Brsenham's algorithm* pseudo code
+
+   ```
+   y = y0
+   for x = x0 to x1 do:
+      draw(x, y)
+      if f(x + 1, y+ 0.5) < 0 then
+         y = y + 1
+   ```
+   $y_0, x_0$ are the integer parts of $x, y$
+
+   $f(x, y)$ is the implicit equation from above
+])
+
+#pinkbox("circles in descrete space", [
+   the parametric equation for the circle in terms of angle:
+   $
+      C = R dot vec(cos theta, sin theta)
+   $
+   where $C$ is the center and $R$ is the radius
+
+
+])
+
+- If pixels in an image are accessed as (x, y) with x rightwards and y downwards. If the origin
+   is at the top-left corner, is this coordinate system row-major or column-major?
+   
+   row, cause first we go right, then we go down
+
+
+#pinkbox("indices", [
+   - bit-plane?
+
+
+])
+
+- nearest neighbour
+
+- weighted bilinear
+
+=== Tutorial 2
+
+#pinkbox("Ear clipping", [
+   
+])
+
+#pinkbox("containment test: circle", [
+   must satisfy:
+   $
+      (x - C_x)^2 + (y - C_y)^2 <= R^2
+   $
+   where $C$ is the center of the disk, and $R$ is the radius
+])
+
+#pinkbox("containment test: sphere", [
+   $
+      | P - C | <= R
+   $
+   where $C$ is the center of the sphere, and $R$ is the radius
+])
+
+#pinkbox("line intersection test", [
+   equate the two lines, solve
+])
+
+#pinkbox("ray-circle intersection", [
+   use the parametric equation of the ray, and circle equate and solve
+])
+
+#pinkbox("ray triangle intersection", [
+   write the parametric equation for the ray, and each side of the
+   triangle, equate and solve
+
+])
+
+#pinkbox("ray sphere intersection", [
+   move everything so that the sphere is at the origin, write down the implcite functions for
+   the ray, and sphere.
+   $
+      R = P' + lambda D \
+      S = P_"sphere"^2 = r^2
+   $
+
+   equate and solve
+])
+
+#pinkbox("lambertian reflection", [
+   to compute the diffuse light intensity with lambert s law
+
+   $
+      P, L_"pos", N \
+
+      I_D = max(0, N dot L_"dir") \
+
+      L_"dir" = (L_"pos" - P) / (||L_"pos" - P||)
+   $
+])
+
+
+
+
+
+
 == Matrix multiplication
 
-(column vectora also)
+(column vectors also)
 
 == rotations on a plane
 
@@ -697,7 +879,7 @@ https://en.wikipedia.org/wiki/Rotation_matrix?useskin=vector
 
 == All types of color maps
 
-wtf is colom major order? (the way to order matricies in 1D)
+wtf is colon major order? (the way to order matricies in 1D)
 
 opengl compatability profile features on all platforms
 
