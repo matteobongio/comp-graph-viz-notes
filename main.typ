@@ -675,12 +675,9 @@ A Renderer can have many actors, a RenderWindow can have many Renderers
 
 
 
+= Tutorials
 
-= Revision
-
-== Tutorials
-
-=== Tutorial 1
+== Tutorial 1
 
 *Linear Algebra*
 
@@ -797,7 +794,7 @@ A Renderer can have many actors, a RenderWindow can have many Renderers
 
 - weighted bilinear
 
-=== Tutorial 2
+== Tutorial 2
 
 #pinkbox("Ear clipping", [
    
@@ -856,7 +853,7 @@ A Renderer can have many actors, a RenderWindow can have many Renderers
 ])
 
 
-
+== Tutorial 3
 
 
 
@@ -886,6 +883,46 @@ opengl compatability profile features on all platforms
 VTK
 
 rasterization
+
+= Mock Exam
+
+*Ray tracing impact:*
+- Frame pixel resolution (i.e. width & height [px]): #text(red, [ Significant impact ])
+- Recursion depth of secondary rays: #text(red, [ Significant impact ])
+- Number of scene objects: #text(yellow, [Some impact])
+- Size of scene objects: #text(green, [No impact])
+- Content-to-pixel coverage: #text(yellow, [Some impact])
+- Presence and number of textures per surface: #text(green, [No impact])
+- Number of light sources: #text(yellow, [Some impact])
+- The near-far ratio of the virtual camera: #text(green, [No impact])
+
+basic operation of rasterization is the pixel-/point-in-triangle test
+
+in OpenGL's compatability profile:
+- zBuffer / Depth Buffer: #text(green, [supported])
+- Order-Independent Alpha Blending: #text(red, [not supported])
+- Immediate-Mode Rendering: #text(green, [supported])
+- GPU-side Object Transformation, Clipping & Lighting: #text(green, [supported])
+- Predefined shader variables & functions: #text(green, [supported])
+- Programmable Compute Shader: #text(red, [not supported])
+- Programmable Vertex Shader: #text(green, [supported])
+- Buffer Object Rendering: #text(green, [supported])
+
+*Channels ranked by effectiveness:*
++ lateral position on common scale
++ tilt / orientation / angle
++ 2D area
++ depth, i.e. 3D position
++ (colour) saturation
++ curvature
+
+*VTK Mappers:*
+- The mapper performs the visual mapping (i.e. the visual encoding) of data types and data attributes to marks and channels.
+- The mapper functionalities depend on the data type that is to be mapped.
+- The mapper modulates the scale- and colour of the marks based on the attributes of the data.
+- A (VTK Volume) Raycaster is a type of mapper.
+- Glyphs are a type of mapper.
+
 
 = Support Lecture
 
