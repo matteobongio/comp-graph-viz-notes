@@ -833,8 +833,9 @@ A Renderer can have many actors, a RenderWindow can have many Renderers
    move everything so that the sphere is at the origin, write down the implcite functions for
    the ray, and sphere.
    $
-      R = P' + lambda D \
-      S = P_"sphere"^2 = r^2
+      P' = O - C \
+      R = P' + t D \
+      S = || R ||^2 = r^2
    $
 
    equate and solve
